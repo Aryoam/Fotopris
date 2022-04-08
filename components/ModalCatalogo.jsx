@@ -42,18 +42,23 @@ const ModalCatalogo = ({ img, categoria }) => {
   };
 
   const handleClose = () => {
-    setShow(false);
     setPrecioFinal(0);
     setFormatoSelect("");
     setChangeId("");
+    setShow(false);
   };
   const handleShow = () => setShow(true);
   const handleCarrito = () => {
     toast("Añadido al carrito", {
-      onClose: () => {
-        setShow(false);
+      onOpen: () => {
+        setTimeout(() => {
+          setShow(false);
+        }, 1300);
+
+        console.log("ya");
       },
-      autoClose: 500,
+      type: "success",
+      autoClose: 300,
       hideProgressBar: true,
     });
     User.setCarrito([
@@ -80,13 +85,13 @@ const ModalCatalogo = ({ img, categoria }) => {
     );
   });
 
-  const precios = formatos.map((precio, key) => {
-    return (
-      <div key={key} value={precio.precio} className="boxOpciones">
-        {precio.precio}
-      </div>
-    );
-  });
+  // const precios = formatos.map((precio, key) => {
+  //   return (
+  //     <div key={key} value={precio.precio} className="boxOpciones">
+  //       {precio.precio}
+  //     </div>
+  //   );
+  // });
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
