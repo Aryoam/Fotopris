@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import UserContext from "../UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModalCatalogo = ({ img, categoria }) => {
   const [show, setShow] = useState(false);
-  const [select, setSelect] = useState(false);
   const [changeId, setChangeId] = useState("");
   const [formatoSelect, setFormatoSelect] = useState("");
-  const [tamanioSelect, setTamanioSelect] = useState("");
   const [precio, setPrecio] = useState(0);
   const [precioFinal, setPrecioFinal] = useState(0);
 
@@ -34,28 +34,28 @@ const ModalCatalogo = ({ img, categoria }) => {
 
   const handleFormato = (e) => {
     setFormatoSelect(e.target.value);
-    setSelect(true);
   };
 
   const handleTamanio = (e) => {
-    setSelect(true);
-    setTamanioSelect(e.target.value);
     setChangeId(e.target.id);
-    console.log(changeId);
-    if (select) {
-      setPrecioFinal(precio + Number(e.target.value));
-    }
+    setPrecioFinal(precio + Number(e.target.value));
   };
 
   const handleClose = () => {
     setShow(false);
     setPrecioFinal(0);
     setFormatoSelect("");
-    setTamanioSelect("");
     setChangeId("");
   };
   const handleShow = () => setShow(true);
   const handleCarrito = () => {
+    toast("Añadido al carrito", {
+      onClose: () => {
+        setShow(false);
+      },
+      autoClose: 500,
+      hideProgressBar: true,
+    });
     User.setCarrito([
       ...User.carrito,
       {
@@ -69,6 +69,7 @@ const ModalCatalogo = ({ img, categoria }) => {
   const formato = formatos.map((opcion, key) => {
     return (
       <button
+        key={key}
         value={opcion.precio}
         id={opcion.id}
         className={`"boxOpciones" ${opcion.id == changeId ? "resaltar" : null}`}
@@ -81,7 +82,7 @@ const ModalCatalogo = ({ img, categoria }) => {
 
   const precios = formatos.map((precio, key) => {
     return (
-      <div value={precio.precio} className="boxOpciones">
+      <div key={key} value={precio.precio} className="boxOpciones">
         {precio.precio}
       </div>
     );
@@ -139,6 +140,7 @@ const ModalCatalogo = ({ img, categoria }) => {
           <Button variant="primary" onClick={handleCarrito}>
             Añadir al carrito
           </Button>
+          <ToastContainer />
         </Modal.Footer>
       </Modal>
     </>

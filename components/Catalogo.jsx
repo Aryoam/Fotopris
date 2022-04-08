@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col, Row } from "react-bootstrap";
 import ModalCatalogo from "./ModalCatalogo";
 
 const Catalogo = () => {
@@ -15,24 +15,26 @@ const Catalogo = () => {
 
   const fotos = articulos.map(({ url, categoria }, key) => {
     return (
-      <Card key={key} style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={url} />
-        <Card.Body>
-          <Card.Text>
-            {categoria === "A"
-              ? "19,99€"
-              : categoria === "B"
-              ? "39,99€"
-              : categoria === "C"
-              ? "59,99€"
-              : null}
-          </Card.Text>
-          <ModalCatalogo img={url} categoria={categoria} />
-        </Card.Body>
-      </Card>
+      <Col xs="12" sm="6" md="4" lg="3" className="mb-4" key={key}>
+        <Card key={key}>
+          <Card.Img variant="top" src={url} />
+          <Card.Body>
+            <Card.Text>
+              {categoria === "A"
+                ? "19,99€"
+                : categoria === "B"
+                ? "39,99€"
+                : categoria === "C"
+                ? "59,99€"
+                : null}
+            </Card.Text>
+            <ModalCatalogo img={url} categoria={categoria} />
+          </Card.Body>
+        </Card>
+      </Col>
     );
   });
-  return <div>{fotos}</div>;
+  return <Row className="catalogoGrid">{fotos}</Row>;
 };
 
 export default Catalogo;

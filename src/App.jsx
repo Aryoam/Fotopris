@@ -4,6 +4,7 @@ import { Layout } from "../layout/Layout";
 import Catalogo from "../components/Catalogo";
 import Carrito from "../components/Carrito";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
 
 function App() {
