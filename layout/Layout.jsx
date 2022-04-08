@@ -37,7 +37,7 @@ export const Layout = () => {
                   src="https://i.imgur.com/p4cbGbr.png"
                   alt="Carrito"
                 />
-                <span>{total.toFixed(2)}</span>
+                <span>{`${total.toFixed(2)}€`}</span>
               </div>
               <Toast
                 className="toastCarrito"

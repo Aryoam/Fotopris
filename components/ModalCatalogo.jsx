@@ -53,9 +53,9 @@ const ModalCatalogo = ({ img, categoria }) => {
       onOpen: () => {
         setTimeout(() => {
           setShow(false);
+          setFormatoSelect("");
+          setChangeId("");
         }, 1300);
-
-        console.log("ya");
       },
       type: "success",
       autoClose: 300,
@@ -85,13 +85,6 @@ const ModalCatalogo = ({ img, categoria }) => {
     );
   });
 
-  // const precios = formatos.map((precio, key) => {
-  //   return (
-  //     <div key={key} value={precio.precio} className="boxOpciones">
-  //       {precio.precio}
-  //     </div>
-  //   );
-  // });
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
